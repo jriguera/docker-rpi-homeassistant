@@ -82,7 +82,9 @@ fi
 # Creating the release
 if [ -z "$VERSION" ]
 then
-    VERSION=$(sed -ne 's/^ARG.*VERSION=\(.*\)/\1/p' docker/Dockerfile)
+    VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' docker/Dockerfile)
+    MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' docker/Dockerfile)
+    [ -n "$MYVERSION" ] && VERSION="$VERSION-$MYVERSION"
     echo "* Creating final release version $VERSION (from Dockerfile) ..."
 else
     echo "* Creating final release version $VERSION (from input)..."
@@ -90,8 +92,14 @@ fi
 
 # Get the last git commit made by this script
 LASTCOMMIT=$(git show-ref --tags -d | tail -n 1)
-echo "* Changes since last version with commit $LASTCOMMIT: "
-CHANGELOG=$(git log --pretty="%h %aI %s (%an)" $LASTCOMMIT..@ | sed 's/^/- /')
+if [ -z "$LASTCOMMIT" ]
+then
+    echo "* Changes since the beginning: "
+    CHANGELOG=$(git log --pretty="%h %aI %s (%an)" | sed 's/^/- /')
+else
+    echo "* Changes since last version with commit $LASTCOMMIT: "
+    CHANGELOG=$(git log --pretty="%h %aI %s (%an)" "$(echo $LASTCOMMIT | cut -d' ' -f 1)..@" | sed 's/^/- /')
+fi
 if [ -z "$CHANGELOG" ]
 then
     echo "ERROR: no commits since last release with commit $LASTCOMMIT!. Please "
@@ -101,18 +109,20 @@ fi
 echo "$CHANGELOG"
 
 pushd docker
-    echo "* Building Docker image with tag $NAME ..."
+    echo "* Building Docker image with tag $NAME:$VERSION ..."
     $DOCKER build . -t $NAME
-    $DOCKER tag $NAME $DOCKER_TAG:$VERSION
+    $DOCKER tag $NAME $DOCKER_TAG
 
     # Uploading docker image
     echo "* Pusing Docker image to Docker Hub ..."
+    $DOCKER push $DOCKER_TAG
+    $DOCKER tag $NAME $DOCKER_TAG:$VERSION
     $DOCKER push $DOCKER_TAG
 popd
 
 # Create annotated tag
 echo "* Creating a git tag ... "
-git tag -a v$VERSION -m "$RELEASE v$VERSION"
+git tag -a "v$VERSION" -m "$RELEASE v$VERSION"
 git push
 
 # Create a release in Github
@@ -126,7 +136,7 @@ $DESCRIPTION
 
 $CHANGELOG
 
-## Using in a bosh Deployment
+## Using it
 
     docker run --name ha -p 8123:8123  -v $(pwd)/config:/config -d jriguera/$RELEASE
 

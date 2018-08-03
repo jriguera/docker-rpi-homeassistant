@@ -15,9 +15,38 @@ GITHUB_REPO="jriguera/docker-rpi-homeassistant"
 DOCKER=docker
 JQ=jq
 CURL="curl -s"
-
 RE_VERSION_NUMBER='^[0-9]+([0-9\.]*[0-9]+)*$'
 
+###
+
+VERSION=""
+case $# in
+    0)
+        echo "*** Creating a new release. Automatically calculating next release version number"
+        ;;
+    1)
+        if [ $1 == "-h" ] || [ $1 == "--help" ]
+        then
+            echo "Usage:  $0 [version-number]"
+            echo "  Creates a release, commits the changes to this repository using tags and uploads "
+            echo "  the release to Github Releases and the final Docker image to Docker Hub. "
+            echo "  It also adds comments based on previous git commits."
+            exit 0
+        else
+            VERSION=$1
+            if ! [[ $VERSION =~ $RE_VERSION_NUMBER ]]
+            then
+                echo "ERROR: Incorrect version number!"
+                exit 1
+            fi
+            echo "*** Creating a new release. Using release version number $VERSION."
+        fi
+        ;;
+    *)
+        echo "ERROR: incorrect argument. See '$0 --help'"
+        exit 1
+        ;;
+esac
 
 # Create a personal github token to use this script
 if [ -z "$GITHUB_TOKEN" ]
@@ -49,35 +78,6 @@ then
     exit 1
 fi
 
-VERSION=""
-case $# in
-    0)
-        echo "*** Creating a new release. Automatically calculating next release version number"
-        ;;
-    1)
-        if [ $1 == "-h" ] || [ $1 == "--help" ]
-        then
-            echo "Usage:  $0 [version-number]"
-            echo "  Creates a release, commits the changes to this repository using tags and uploads "
-            echo "  the release to Github Releases and the final Docker image to Docker Hub. "
-            echo "  It also adds comments based on previous git commits."
-            exit 0
-        else
-            VERSION=$1
-            if ! [[ $VERSION =~ $RE_VERSION_NUMBER ]]
-            then
-                echo "ERROR: Incorrect version number!"
-                exit 1
-            fi
-            echo "*** Creating a new release. Using release version number $VERSION."
-        fi
-        ;;
-    *)
-        echo "ERROR: incorrect argument. See '$0 --help'"
-        exit 1
-        ;;
-esac
-
 # Creating the release
 if [ -z "$VERSION" ]
 then
@@ -88,23 +88,25 @@ else
 fi
 
 # Get the last git commit made by this script
-lastcommit=$(git log --format="%h" --grep="$RELEASE v*" | head -1)
-echo "* Changes since last version with commit $lastcommit: "
-git_changes=$(git log --pretty="%h %aI %s (%an)" $lastcommit..@ | sed 's/^/- /')
-if [ -z "$git_changes" ]
+LASTCOMMIT=$(git log --format="%h" --grep="$RELEASE v*" | head -1)
+echo "* Changes since last version with commit $LASTCOMMIT: "
+CHANGELOG=$(git log --pretty="%h %aI %s (%an)" $LASTCOMMIT..@ | sed 's/^/- /')
+if [ -z "$CHANGELOG" ]
 then
-    echo "ERROR: no commits since last release with commit $lastcommit!. Please "
+    echo "ERROR: no commits since last release with commit $LASTCOMMIT!. Please "
     echo "commit your changes to create and publish a new release!"
     exit 1
 fi
-echo "$git_changes"
+echo "$CHANGELOG"
 
-echo "* Building Docker image with tag $NAME ..."
-$DOCKER build . -t $NAME
+pushd docker
+    echo "* Building Docker image with tag $NAME ..."
+    $DOCKER build . -t $NAME
 
-# Uploading docker image
-echo "* Pusing Docker image to Docker Hub ..."
-$DOCKER push $RELEASE:$NAME
+    # Uploading docker image
+    echo "* Pusing Docker image to Docker Hub ..."
+    $DOCKER push $RELEASE:$NAME
+popd
 
 # Create a new tag and update the changes
 echo "* Commiting git changes ..."
@@ -121,7 +123,7 @@ $DESCRIPTION
 
 ## Changes since last version
 
-$git_changes
+$CHANGELOG
 
 ## Using in a bosh Deployment
 
@@ -132,10 +134,12 @@ EOF
 printf -v DATA '{"tag_name": "v%s","target_commitish": "master","name": "v%s","body": %s,"draft": false, "prerelease": false}' "$VERSION" "$VERSION" "$(echo "$DESC" | $JQ -R -s '@text')"
 $CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" -XPOST --data "$DATA" "https://api.github.com/repos/$GITHUB_REPO/releases" > /dev/null
 
+git pull
+
 echo
 echo "*** Description https://github.com/$GITHUB_REPO/releases/tag/v$VERSION: "
 echo
-echo "$description"
+echo "$DESC"
 
 exit 0
 

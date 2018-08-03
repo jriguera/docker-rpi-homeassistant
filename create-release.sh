@@ -22,7 +22,7 @@ RE_VERSION_NUMBER='^[0-9]+([0-9\.]*[0-9]+)*$'
 VERSION=""
 case $# in
     0)
-        echo "*** Creating a new release. Automatically calculating next release version number"
+        echo "*** Creating a new release. Automatically calculating version number from Dockerfile"
         ;;
     1)
         if [ $1 == "-h" ] || [ $1 == "--help" ]
@@ -81,7 +81,7 @@ fi
 # Creating the release
 if [ -z "$VERSION" ]
 then
-    VERSION=$(sed -ne 's/^ARG.*VERSION=\(.*\)/\1/p' Dockerfile)
+    VERSION=$(sed -ne 's/^ARG.*VERSION=\(.*\)/\1/p' docker/Dockerfile)
     echo "* Creating final release version $VERSION (from Dockerfile) ..."
 else
     echo "* Creating final release version $VERSION (from input)..."

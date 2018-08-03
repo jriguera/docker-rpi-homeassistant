@@ -6,6 +6,7 @@ set -e
 ##
 
 NAME="homeassistant"
+DOCKER_TAG="jriguera/$NAME"
 RELEASE="rpi-homeassistant"
 DESCRIPTION="Docker image to run Home Assistant in a Raspberry Pi"
 GITHUB_REPO="jriguera/docker-rpi-homeassistant"
@@ -22,7 +23,7 @@ RE_VERSION_NUMBER='^[0-9]+([0-9\.]*[0-9]+)*$'
 VERSION=""
 case $# in
     0)
-        echo "*** Creating a new release. Automatically calculating version number from Dockerfile"
+        echo "*** Creating a new release. Automatically calculating version number"
         ;;
     1)
         if [ $1 == "-h" ] || [ $1 == "--help" ]
@@ -88,7 +89,7 @@ else
 fi
 
 # Get the last git commit made by this script
-LASTCOMMIT=$(git log --format="%h" --grep="$RELEASE v*" | head -1)
+LASTCOMMIT=$(git show-ref --tags -d | tail -n 1)
 echo "* Changes since last version with commit $LASTCOMMIT: "
 CHANGELOG=$(git log --pretty="%h %aI %s (%an)" $LASTCOMMIT..@ | sed 's/^/- /')
 if [ -z "$CHANGELOG" ]
@@ -102,17 +103,17 @@ echo "$CHANGELOG"
 pushd docker
     echo "* Building Docker image with tag $NAME ..."
     $DOCKER build . -t $NAME
+    $DOCKER tag $NAME $DOCKER_TAG:$VERSION
 
     # Uploading docker image
     echo "* Pusing Docker image to Docker Hub ..."
-    $DOCKER push $RELEASE:$NAME
+    $DOCKER push $DOCKER_TAG
 popd
 
-# Create a new tag and update the changes
-echo "* Commiting git changes ..."
-git add *
-git commit -m "$RELEASE v$VERSION"
-git push --tags
+# Create annotated tag
+echo "* Creating a git tag ... "
+git tag -a v$VERSION -m "$RELEASE v$VERSION"
+git push
 
 # Create a release in Github
 echo "* Creating a new release in Github ... "
@@ -134,7 +135,7 @@ EOF
 printf -v DATA '{"tag_name": "v%s","target_commitish": "master","name": "v%s","body": %s,"draft": false, "prerelease": false}' "$VERSION" "$VERSION" "$(echo "$DESC" | $JQ -R -s '@text')"
 $CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" -XPOST --data "$DATA" "https://api.github.com/repos/$GITHUB_REPO/releases" > /dev/null
 
-git pull
+git fetch --tags
 
 echo
 echo "*** Description https://github.com/$GITHUB_REPO/releases/tag/v$VERSION: "
@@ -142,4 +143,3 @@ echo
 echo "$DESC"
 
 exit 0
-

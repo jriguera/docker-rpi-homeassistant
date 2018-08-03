@@ -123,7 +123,7 @@ popd
 # Create annotated tag
 echo "* Creating a git tag ... "
 git tag -a "v$VERSION" -m "$RELEASE v$VERSION"
-git push
+git push --tags
 
 # Create a release in Github
 echo "* Creating a new release in Github ... "

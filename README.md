@@ -27,7 +27,6 @@ docker build . -t homeassistant
 create-release.sh
 ```
 
-
 ### Run
 
 Test

@@ -6,6 +6,7 @@ set -e
 ##
 
 NAME="homeassistant"
+DOCKER_TAG="jriguera/$NAME"
 RELEASE="rpi-homeassistant"
 DESCRIPTION="Docker image to run Home Assistant in a Raspberry Pi"
 GITHUB_REPO="jriguera/docker-rpi-homeassistant"
@@ -22,7 +23,7 @@ RE_VERSION_NUMBER='^[0-9]+([0-9\.]*[0-9]+)*$'
 VERSION=""
 case $# in
     0)
-        echo "*** Creating a new release. Automatically calculating next release version number"
+        echo "*** Creating a new release. Automatically calculating version number"
         ;;
     1)
         if [ $1 == "-h" ] || [ $1 == "--help" ]
@@ -81,16 +82,24 @@ fi
 # Creating the release
 if [ -z "$VERSION" ]
 then
-    VERSION=$(sed -ne 's/^ARG.*VERSION=\(.*\)/\1/p' Dockerfile)
+    VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' docker/Dockerfile)
+    MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' docker/Dockerfile)
+    [ -n "$MYVERSION" ] && VERSION="$VERSION-$MYVERSION"
     echo "* Creating final release version $VERSION (from Dockerfile) ..."
 else
     echo "* Creating final release version $VERSION (from input)..."
 fi
 
 # Get the last git commit made by this script
-LASTCOMMIT=$(git log --format="%h" --grep="$RELEASE v*" | head -1)
-echo "* Changes since last version with commit $LASTCOMMIT: "
-CHANGELOG=$(git log --pretty="%h %aI %s (%an)" $LASTCOMMIT..@ | sed 's/^/- /')
+LASTCOMMIT=$(git show-ref --tags -d | tail -n 1)
+if [ -z "$LASTCOMMIT" ]
+then
+    echo "* Changes since the beginning: "
+    CHANGELOG=$(git log --pretty="%h %aI %s (%an)" | sed 's/^/- /')
+else
+    echo "* Changes since last version with commit $LASTCOMMIT: "
+    CHANGELOG=$(git log --pretty="%h %aI %s (%an)" "$(echo $LASTCOMMIT | cut -d' ' -f 1)..@" | sed 's/^/- /')
+fi
 if [ -z "$CHANGELOG" ]
 then
     echo "ERROR: no commits since last release with commit $LASTCOMMIT!. Please "
@@ -100,18 +109,20 @@ fi
 echo "$CHANGELOG"
 
 pushd docker
-    echo "* Building Docker image with tag $NAME ..."
+    echo "* Building Docker image with tag $NAME:$VERSION ..."
     $DOCKER build . -t $NAME
+    $DOCKER tag $NAME $DOCKER_TAG
 
     # Uploading docker image
     echo "* Pusing Docker image to Docker Hub ..."
-    $DOCKER push $RELEASE:$NAME
+    $DOCKER push $DOCKER_TAG
+    $DOCKER tag $NAME $DOCKER_TAG:$VERSION
+    $DOCKER push $DOCKER_TAG
 popd
 
-# Create a new tag and update the changes
-echo "* Commiting git changes ..."
-git add *
-git commit -m "$RELEASE v$VERSION"
+# Create annotated tag
+echo "* Creating a git tag ... "
+git tag -a "v$VERSION" -m "$RELEASE v$VERSION"
 git push --tags
 
 # Create a release in Github
@@ -125,7 +136,7 @@ $DESCRIPTION
 
 $CHANGELOG
 
-## Using in a bosh Deployment
+## Using it
 
     docker run --name ha -p 8123:8123  -v $(pwd)/config:/config -d jriguera/$RELEASE
 
@@ -134,7 +145,7 @@ EOF
 printf -v DATA '{"tag_name": "v%s","target_commitish": "master","name": "v%s","body": %s,"draft": false, "prerelease": false}' "$VERSION" "$VERSION" "$(echo "$DESC" | $JQ -R -s '@text')"
 $CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" -XPOST --data "$DATA" "https://api.github.com/repos/$GITHUB_REPO/releases" > /dev/null
 
-git pull
+git fetch --tags
 
 echo
 echo "*** Description https://github.com/$GITHUB_REPO/releases/tag/v$VERSION: "
@@ -142,4 +153,3 @@ echo
 echo "$DESC"
 
 exit 0
-

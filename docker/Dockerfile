@@ -4,21 +4,22 @@ FROM arm32v6/alpine:3.8
 # docker run -it -p 8123:8123  homeassistant
 # docker run --name ha -p 8123:8123  -v $(pwd)/config:/config -d homeassistant
 
-LABEL org.label-schema.description="Home Assistant image based on alpine for the Raspberry Pi."
-LABEL org.label-schema.name="rpi-homeassistant"
-LABEL org.label-schema.version="1.0"
-LABEL org.label-schema.usage="/README.md"
-LABEL org.label-schema.url="https://hub.docker.com/r/jriguera/rpi-homeassistant"
-LABEL org.label-schema.vcs-url="https://github.com/jriguera/docker-rpi-homeassistant"
-LABEL maintainer="Jose Riguera <jriguera@gmail.com>"
-LABEL architecture="ARM32v7/armhf"
-
 ARG VERSION=0.74.2
+ARG MYVERSION=jose1
 ARG CONFIGDIR=/config
 ARG PORT=8123
 ARG UID=1000
 ARG GUID=1000
 ARG TIMEZONE=Europe/Amsterdam
+
+LABEL org.label-schema.description="Home Assistant image based on alpine for the Raspberry Pi."
+LABEL org.label-schema.name="rpi-homeassistant"
+LABEL org.label-schema.version="${VERSION}-${MYVERSION}"
+LABEL org.label-schema.usage="/README.md"
+LABEL org.label-schema.url="https://hub.docker.com/r/jriguera/rpi-homeassistant"
+LABEL org.label-schema.vcs-url="https://github.com/jriguera/docker-rpi-homeassistant"
+LABEL maintainer="Jose Riguera <jriguera@gmail.com>"
+LABEL architecture="ARM32v7/armhf"
 
 ENV HA_PORT="${PORT}"
 ENV HA_CONFIG="${CONFIGDIR}"

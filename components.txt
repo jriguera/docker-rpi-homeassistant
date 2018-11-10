@@ -6,6 +6,7 @@ homeassistant.scripts.db_migrator
 # Main components
 homeassistant.components.frontend
 homeassistant.components.http
+homeassistant.components.cloud
 homeassistant.components.auth
 homeassistant.components.tts$
 homeassistant.components.python_script
@@ -37,8 +38,7 @@ homeassistant.components.mysensors
 
 homeassistant.components.sensor.openweathermap
 homeassistant.components.weather.openweathermap
-homeassistant.components.sensor.yweather
-homeassistant.components.weather.yweather
+homeassistant.components.sensor.yr
 
 homeassistant.components.device_tracker.bluetooth_le_tracker
 homeassistant.components.device_tracker.bluetooth_tracker
@@ -46,8 +46,6 @@ homeassistant.components.device_tracker.google_maps
 homeassistant.components.device_tracker.nmap_tracker
 
 homeassistant.components.sensor.arest
-homeassistant.components.sensor.broadlink
-homeassistant.components.switch.broadlink
 homeassistant.components.sensor.dnsip
 homeassistant.components.dweet
 homeassistant.components.feedreader

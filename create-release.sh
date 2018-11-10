@@ -20,6 +20,20 @@ RE_VERSION_NUMBER='^[0-9]+([0-9\.]*[0-9]+)*$'
 
 ###
 
+ARCH=""
+case "$(uname -m)" in
+    armv7l)
+	ARCH='arm32v6'
+    ;;
+    x86_64|amd64)
+        ARCH='amd64'
+    ;;
+    *)
+        echo "ERROR: unsupported architecture: $(uname -m)"
+        exit 1
+    ;;
+esac
+
 VERSION=""
 case $# in
     0)
@@ -111,7 +125,7 @@ echo "$CHANGELOG"
 pushd docker
     echo "* Building Docker image with tag $NAME:$VERSION ..."
     $DOCKER build \
-      --build-arg  ARCH=$(dpkg --print-architecture) \
+      --build-arg ARCH=${ARCH} \
       --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
       .  -t $NAME
     $DOCKER tag $NAME $DOCKER_TAG

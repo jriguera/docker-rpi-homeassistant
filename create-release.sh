@@ -110,7 +110,10 @@ echo "$CHANGELOG"
 
 pushd docker
     echo "* Building Docker image with tag $NAME:$VERSION ..."
-    $DOCKER build . -t $NAME
+    $DOCKER build \
+      --build-arg  ARCH=$(dpkg --print-architecture) \
+      --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
+      .  -t $NAME
     $DOCKER tag $NAME $DOCKER_TAG
 
     # Uploading docker image

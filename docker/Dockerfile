@@ -1,16 +1,20 @@
-FROM arm32v6/alpine:3.8
+# HA Docker
 
 # docker build . -t homeassistant
 # docker run -it -p 8123:8123  homeassistant
 # docker run --name ha -p 8123:8123  -v $(pwd)/config:/config -d homeassistant
 
-ARG VERSION=0.74.2
+ARG ARCH=arm32v6
+FROM "${ARCH}/alpine:3.8"
+
+ARG VERSION=0.82.0
 ARG MYVERSION=jose1
 ARG CONFIGDIR=/config
 ARG PORT=8123
 ARG UID=1000
 ARG GUID=1000
-ARG TIMEZONE=Europe/Amsterdam
+ARG TZ=Europe/Amsterdam
+ARG ARCH
 
 LABEL org.label-schema.description="Home Assistant image based on alpine for the Raspberry Pi."
 LABEL org.label-schema.name="rpi-homeassistant"
@@ -19,13 +23,13 @@ LABEL org.label-schema.usage="/README.md"
 LABEL org.label-schema.url="https://hub.docker.com/r/jriguera/rpi-homeassistant"
 LABEL org.label-schema.vcs-url="https://github.com/jriguera/docker-rpi-homeassistant"
 LABEL maintainer="Jose Riguera <jriguera@gmail.com>"
-LABEL architecture="ARM32v7/armhf"
+LABEL architecture="${ARCH}"
 
 ENV HA_PORT="${PORT}"
 ENV HA_CONFIG="${CONFIGDIR}"
 ENV LANG=en_US.utf8
 ENV LC_ALL=C.UTF-8
-ENV ARCH=arm
+ENV ARCH="${ARCH}"
 ENV CROSS_COMPILE=/usr/bin/
 
 RUN set -xe                                                                 && \
@@ -61,8 +65,8 @@ RUN set -xe                                                                 && \
         iperf3 \
                                                                             && \
     # Timezone
-    cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime                     && \
-    echo "${TIMEZONE}" > /etc/timezone                                      && \
+    cp "/usr/share/zoneinfo/${TZ}" /etc/localtime                           && \
+    echo "${TZ}" > /etc/timezone                                            && \
     # clean up
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/* ~/.cache
 

@@ -26,6 +26,7 @@ do
             else break;
           print $1"\n";
         }
+    }
     END{
         if (found == 0)
             print "# ERROR: "r"\n";

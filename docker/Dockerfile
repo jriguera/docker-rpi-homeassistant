@@ -7,7 +7,7 @@
 ARG ARCH=arm32v6
 FROM "${ARCH}/alpine:3.8"
 
-ARG VERSION=0.82.0
+ARG VERSION=0.82.1
 ARG MYVERSION=jose1
 ARG CONFIGDIR=/config
 ARG PORT=8123
@@ -16,6 +16,8 @@ ARG GUID=1000
 ARG TZ=Europe/Amsterdam
 ARG ARCH
 
+LABEL org.label-schema.docker.schema-version="1.0"
+LABEL org.label-schema.vendor="Jose Riguera"
 LABEL org.label-schema.description="Home Assistant image based on alpine for the Raspberry Pi."
 LABEL org.label-schema.name="rpi-homeassistant"
 LABEL org.label-schema.version="${VERSION}-${MYVERSION}"
@@ -54,6 +56,7 @@ RUN set -xe                                                                 && \
         libsodium \
         jq \
         mariadb-client \
+        mariadb-connector-c \
         mosquitto-clients \
         libxml2 \
         libgcrypt \
@@ -97,6 +100,7 @@ RUN set -xe                                                                 && \
         linux-headers \
         libsodium-dev \
         mariadb-dev \
+        mariadb-connector-c-dev \
         eudev-dev \
                                                                             && \
     # Configuring Python packages

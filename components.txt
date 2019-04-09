@@ -1,7 +1,6 @@
 # HA scripts
 homeassistant.scripts.check_config
 homeassistant.scripts.keyring
-homeassistant.scripts.db_migrator
 
 # Main components
 homeassistant.components.frontend
@@ -11,76 +10,71 @@ homeassistant.components.auth
 homeassistant.components.tts$
 homeassistant.components.python_script
 homeassistant.components.wake_on_lan
-homeassistant.components.switch.wake_on_lan
-homeassistant.components.sensor.cpuspeed
-homeassistant.components.sensor.iperf3
-homeassistant.components.sensor.snmp
-homeassistant.components.switch.snmp
-homeassistant.components.device_tracker.snmp
+homeassistant.components.cpuspeed
+homeassistant.components.iperf3
+homeassistant.components.snmp
 homeassistant.components.discovery
 homeassistant.components.folder_watcher
-homeassistant.components.sensor.speedtest
-homeassistant.components.sensor.systemmonitor
-homeassistant.components.mqtt.server
+homeassistant.components.speedtestdotnet
+homeassistant.components.systemmonitor
 homeassistant.components.mqtt$
 homeassistant.components.ffmpeg
 homeassistant.components.recorder
-homeassistant.components.sensor.sql
-homeassistant.components.sensor.whois
+homeassistant.components.sql
+homeassistant.components.whois
+homeassistant.components.stream
 # homeassistant.components.rpi_gpio
 
-homeassistant.components.tts.picotts
-homeassistant.components.tts.google
+homeassistant.components.tts
 homeassistant.components.google
 homeassistant.components.remember_the_milk
 homeassistant.components.ifttt
 homeassistant.components.mysensors
 
-homeassistant.components.sensor.openweathermap
-homeassistant.components.weather.openweathermap
-homeassistant.components.sensor.yr
+homeassistant.components.opensensemap
+homeassistant.components.openweathermap
+homeassistant.components.yr
 
-homeassistant.components.device_tracker.bluetooth_le_tracker
-homeassistant.components.device_tracker.bluetooth_tracker
-homeassistant.components.device_tracker.google_maps
-homeassistant.components.device_tracker.nmap_tracker
+homeassistant.components.bluetooth_le_tracker
+homeassistant.components.bluetooth_tracker
+homeassistant.components.google_maps
+homeassistant.components.nmap_tracker
 
-homeassistant.components.sensor.arest
-homeassistant.components.sensor.dnsip
+homeassistant.components.dnsip
 homeassistant.components.dweet
 homeassistant.components.feedreader
-homeassistant.components.sensor.geo_rss_events
-homeassistant.components.sensor.season
-homeassistant.components.sensor.serial
+homeassistant.components.geo_rss_events
+homeassistant.components.season
+homeassistant.components.serial$
 
-homeassistant.components.notify.xmpp
-homeassistant.components.notify.mailgun
-homeassistant.components.notify.html5
-homeassistant.components.notify.pushbullet
+homeassistant.components.xmpp
+homeassistant.components.mailgun
+homeassistant.components.html5
+homeassistant.components.pushbullet
 homeassistant.components.telegram_bot
 homeassistant.components.twilio
-homeassistant.components.notify.twitter
-homeassistant.components.media_player.mpd
-homeassistant.components.media_player.vlc
-homeassistant.components.media_player.spotify
-homeassistant.components.media_player.gstreamer
-# homeassistant.components.light.rpi_gpio_pwm
+homeassistant.components.twitter
+homeassistant.components.mpd
+homeassistant.components.vlc
+homeassistant.components.spotify
+homeassistant.components.gstreamer
+# homeassistant.components.rpi_gpio_pwm
 
-# homeassistant.components.image_processing.dlib_face_detect
-# homeassistant.components.image_processing.dlib_face_identify
-homeassistant.components.image_processing.opencv
-# homeassistant.components.image_processing.tensorflow
+# homeassistant.components.dlib_face_detect
+# homeassistant.components.dlib_face_identify
+homeassistant.components.opencv
+# homeassistant.components.tensorflow
 
 # NL
-homeassistant.components.sensor.dsmr
-homeassistant.components.climate.honeywell
+homeassistant.components.dsmr
+homeassistant.components.honeywell
 homeassistant.components.evohome
-homeassistant.components.sensor.postnl
+homeassistant.components.postnl
 homeassistant.components.zwave
+homeassistant.components.vera
 
 # Other
-homeassistant.components.sensor.transmission
-homeassistant.components.switch.transmission
+homeassistant.components.transmission
 homeassistant.components.prometheus
-homeassistant.components.camera.yi
+homeassistant.components.yi$
 

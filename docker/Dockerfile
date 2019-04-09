@@ -5,7 +5,7 @@
 # docker run --name ha -p 8123:8123  -v $(pwd)/config:/config -d homeassistant
 
 ARG ARCH=arm32v6
-FROM "${ARCH}/alpine:3.8"
+FROM "${ARCH}/alpine:3.9"
 
 ARG VERSION=0.91.2
 ARG MYVERSION=jose1

@@ -1,12 +1,16 @@
+# Auth
+homeassistant.auth.mfa_modules.notify
+homeassistant.auth.mfa_modules.totp
+
 # HA scripts
 homeassistant.scripts.check_config
 homeassistant.scripts.keyring
 
 # Main components
+homeassistant.components.otp
 homeassistant.components.frontend
 homeassistant.components.http
 homeassistant.components.cloud
-homeassistant.components.auth
 homeassistant.components.tts$
 homeassistant.components.python_script
 homeassistant.components.wake_on_lan
@@ -45,7 +49,7 @@ homeassistant.components.dweet
 homeassistant.components.feedreader
 homeassistant.components.geo_rss_events
 homeassistant.components.season
-homeassistant.components.serial$
+homeassistant.components.serial
 
 homeassistant.components.xmpp
 homeassistant.components.mailgun
@@ -76,5 +80,5 @@ homeassistant.components.vera
 # Other
 homeassistant.components.transmission
 homeassistant.components.prometheus
-homeassistant.components.yi$
+homeassistant.components.yi
 

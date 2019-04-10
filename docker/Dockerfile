@@ -96,6 +96,7 @@ RUN set -xe                                                                 && \
         bluez-dev \
         libxrandr-dev \
         libxml2-dev \
+        ffmpeg-dev \
         libxslt-dev \
         linux-headers \
         libsodium-dev \

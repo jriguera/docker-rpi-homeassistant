@@ -12,19 +12,30 @@ git submodule init
 git submodule update
 ```
 
-Submodules are not needed to build the Docker image, is just to
-make it easy to track changes.
+Submodules are not needed to build the Docker image, is just to make it easy to track changes and python requirements.
 
 And then go to  `docker` folder and type:
 
 ```
 docker build . -t homeassistant
+# or run `./docker-build.sh`
 ```
 
-### Create final release and publish to Docker Hub
+### Update HA version
+
+1. Update submodule to the proper tag `cd home-assistant && git checkout tags/<VERSION>`
+2. Update `docker/Dockerfile` version argument
+3. Manage requirements and check errors: `./manage-components.sh | grep -i "error"`
+4. Update `docker/requirements.txt`: `./manage-components.sh > docker/requirements.txt`
+5. Commit the cahnges: `git add home-assistant docker/Dockerfile docker/requirements.txt && git commit -m "Updated HA submodule to <version>`
+6. Build new docker image: `./docker-build.sh`
+7. Publish new docker image in DockerHub and GitHub: `create-publish-release.sh`
+
+
+### Create final release and publish to Docker Hub and Github
 
 ```
-create-release.sh
+create-publish-release.sh
 ```
 
 ### Run

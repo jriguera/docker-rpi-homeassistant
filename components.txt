@@ -7,6 +7,8 @@ homeassistant.scripts.check_config
 homeassistant.scripts.keyring
 
 # Main components
+homeassistant.components.mobile_app
+homeassistant.components.owntracks
 homeassistant.components.otp
 homeassistant.components.frontend
 homeassistant.components.http
@@ -27,6 +29,7 @@ homeassistant.components.recorder
 homeassistant.components.sql
 homeassistant.components.whois
 homeassistant.components.stream
+homeassistant.components.opensensemap
 # homeassistant.components.rpi_gpio
 
 homeassistant.components.tts

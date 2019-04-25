@@ -7,8 +7,8 @@
 ARG ARCH=arm32v6
 FROM "${ARCH}/alpine:3.9"
 
-ARG VERSION=0.91.2
-ARG MYVERSION=jose1
+ARG VERSION=0.92.0
+ARG MYVERSION=jose0
 ARG CONFIGDIR=/config
 ARG PORT=8123
 ARG UID=1000
@@ -108,9 +108,9 @@ RUN set -xe                                                                 && \
     pip3 install --no-cache-dir --upgrade pip setuptools                    && \
     pip3 install --no-cache-dir --upgrade mysqlclient                       && \
     pip3 install --no-cache-dir --upgrade wheel                             && \
-    pip3 install --no-cache-dir --upgrade uvloop==0.11.3                    && \
-    pip3 install --no-cache-dir --upgrade cchardet                          && \
+    pip3 install --no-cache-dir --upgrade uvloop==0.12.2                    && \
     pip3 install --no-cache-dir --upgrade cython                            && \
+    pip3 install --no-cache-dir --upgrade cchardet                          && \
     pip3 install --no-cache-dir homeassistant=="${VERSION}"                 && \
     pip3 install --no-cache-dir -r requirements.txt                         && \
     # clean up

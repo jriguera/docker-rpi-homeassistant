@@ -114,6 +114,10 @@ python-whois==0.7.1
 # (188) homeassistant.components.stream
 av==6.1.2
 
+##### homeassistant.components.opensensemap
+# (787) homeassistant.components.opensensemap
+opensensemap-api==0.1.5
+
 ##### homeassistant.components.tts
 # (712) homeassistant.components.tts
 mutagen==1.42.0

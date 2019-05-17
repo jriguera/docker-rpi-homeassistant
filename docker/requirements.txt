@@ -1,319 +1,319 @@
 ##### homeassistant.auth.mfa_modules.notify
-# (1207) homeassistant.auth.mfa_modules.notify
-pyotp==2.2.6
+# (1237) homeassistant.auth.mfa_modules.notify
+pyotp==2.2.7
 
 ##### homeassistant.auth.mfa_modules.totp
-# (57) homeassistant.auth.mfa_modules.totp
+# (63) homeassistant.auth.mfa_modules.totp
 PyQRCode==1.2.1
 
-# (1208) homeassistant.auth.mfa_modules.totp
-pyotp==2.2.6
+# (1238) homeassistant.auth.mfa_modules.totp
+pyotp==2.2.7
 
 ##### homeassistant.scripts.check_config
-# (290) homeassistant.scripts.check_config
+# (305) homeassistant.scripts.check_config
 colorlog==4.0.2
 
 ##### homeassistant.scripts.keyring
-# (610) homeassistant.scripts.keyring
+# (628) homeassistant.scripts.keyring
 keyring==17.1.1
 
-# (613) homeassistant.scripts.keyring
+# (631) homeassistant.scripts.keyring
 keyrings.alt==3.1.1
 
 ##### homeassistant.components.updater
-# (340) homeassistant.components.updater
+# (355) homeassistant.components.updater
 distro==1.4.0
 
 ##### homeassistant.components.mobile_app
-# (53) homeassistant.components.mobile_app
+# (59) homeassistant.components.mobile_app
 PyNaCl==1.3.0
 
 ##### homeassistant.components.owntracks
-# (54) homeassistant.components.owntracks
+# (60) homeassistant.components.owntracks
 PyNaCl==1.3.0
 
 ##### homeassistant.components.otp
-# (1209) homeassistant.components.otp
-pyotp==2.2.6
+# (1239) homeassistant.components.otp
+pyotp==2.2.7
 
 ##### homeassistant.components.frontend
-# (550) homeassistant.components.frontend
-home-assistant-frontend==20190424.0
+# (565) homeassistant.components.frontend
+home-assistant-frontend==20190514.0
 
 ##### homeassistant.components.http
-# (127) homeassistant.components.http
+# (133) homeassistant.components.http
 aiohttp_cors==0.7.0
 
 ##### homeassistant.components.cloud
-# (520) homeassistant.components.cloud
+# (535) homeassistant.components.cloud
 hass-nabucasa==0.12
 
-# (972) homeassistant.components.cloudflare
+# (999) homeassistant.components.cloudflare
 pycfdns==0.0.1
 
 ##### homeassistant.components.tts$
-# (712) homeassistant.components.tts
+# (733) homeassistant.components.tts
 mutagen==1.42.0
 
 ##### homeassistant.components.python_script
-# (1503) homeassistant.components.python_script
+# (1530) homeassistant.components.python_script
 restrictedpython==4.0b8
 
 ##### homeassistant.components.wake_on_lan
-# (1762) homeassistant.components.wake_on_lan
+# (1783) homeassistant.components.wake_on_lan
 wakeonlan==1.1.6
 
 ##### homeassistant.components.cpuspeed
-# (896) homeassistant.components.cpuspeed
+# (920) homeassistant.components.cpuspeed
 py-cpuinfo==5.0.0
 
 ##### homeassistant.components.iperf3
-# (595) homeassistant.components.iperf3
+# (613) homeassistant.components.iperf3
 iperf3==0.1.10
 
 ##### homeassistant.components.snmp
-# (1278) homeassistant.components.snmp
-pysnmp==4.4.8
+# (1305) homeassistant.components.snmp
+pysnmp==4.4.9
 
 ##### homeassistant.components.discovery
-# (739) homeassistant.components.discovery
+# (760) homeassistant.components.discovery
 netdisco==2.6.0
 
 ##### homeassistant.components.folder_watcher
-# (1768) homeassistant.components.folder_watcher
+# (1789) homeassistant.components.folder_watcher
 watchdog==0.8.3
 
 ##### homeassistant.components.speedtestdotnet
-# (1619) homeassistant.components.speedtestdotnet
+# (1646) homeassistant.components.speedtestdotnet
 speedtest-cli==2.1.1
 
 ##### homeassistant.components.systemmonitor
-# (875) homeassistant.components.systemmonitor
-psutil==5.6.1
+# (896) homeassistant.components.systemmonitor
+psutil==5.6.2
 
 ##### homeassistant.components.mqtt$
-# (523) homeassistant.components.mqtt
+# (538) homeassistant.components.mqtt
 hbmqtt==0.9.4
 
-# (799) homeassistant.components.mqtt
+# (820) homeassistant.components.mqtt
 paho-mqtt==1.4.0
 
 ##### homeassistant.components.ffmpeg
-# (508) homeassistant.components.ffmpeg
+# (523) homeassistant.components.ffmpeg
 ha-ffmpeg==2.0
 
 ##### homeassistant.components.recorder
-# (1631) homeassistant.components.recorder
-sqlalchemy==1.3.0
+# (1658) homeassistant.components.recorder
+sqlalchemy==1.3.3
 
 ##### homeassistant.components.sql
-# (1632) homeassistant.components.sql
-sqlalchemy==1.3.0
+# (1659) homeassistant.components.sql
+sqlalchemy==1.3.3
 
 ##### homeassistant.components.whois
-# (1404) homeassistant.components.whois
+# (1431) homeassistant.components.whois
 python-whois==0.7.1
 
 ##### homeassistant.components.stream
-# (188) homeassistant.components.stream
+# (200) homeassistant.components.stream
 av==6.1.2
 
 ##### homeassistant.components.opensensemap
-# (787) homeassistant.components.opensensemap
+# (808) homeassistant.components.opensensemap
 opensensemap-api==0.1.5
 
 ##### homeassistant.components.tts
-# (712) homeassistant.components.tts
+# (733) homeassistant.components.tts
 mutagen==1.42.0
 
 ##### homeassistant.components.google
-# (452) homeassistant.components.google_translate
+# (467) homeassistant.components.google_translate
 gTTS-token==1.1.3
 
-# (484) homeassistant.components.google
+# (499) homeassistant.components.google
 google-api-python-client==1.6.4
 
-# (487) homeassistant.components.google_pubsub
+# (502) homeassistant.components.google_pubsub
 google-cloud-pubsub==0.39.1
 
-# (490) homeassistant.components.googlehome
+# (505) homeassistant.components.googlehome
 googledevices==1.0.2
 
-# (493) homeassistant.components.google_travel_time
+# (508) homeassistant.components.google_travel_time
 googlemaps==2.5.1
 
-# (565) homeassistant.components.google
+# (580) homeassistant.components.google
 httplib2==0.10.3
 
-# (658) homeassistant.components.google_maps
+# (676) homeassistant.components.google_maps
 locationsharinglib==3.0.11
 
-# (769) homeassistant.components.google
+# (790) homeassistant.components.google
 oauth2client==4.0.0
 
 ##### homeassistant.components.remember_the_milk
-# (75) homeassistant.components.remember_the_milk
+# (81) homeassistant.components.remember_the_milk
 RtmAPI==0.7.0
 
-# (566) homeassistant.components.remember_the_milk
+# (581) homeassistant.components.remember_the_milk
 httplib2==0.10.3
 
 ##### homeassistant.components.ifttt
-# (1056) homeassistant.components.ifttt
+# (1083) homeassistant.components.ifttt
 pyfttt==0.3
 
 ##### homeassistant.components.mysensors
-# (1171) homeassistant.components.mysensors
+# (1201) homeassistant.components.mysensors
 pymysensors==0.18.0
 
 ##### homeassistant.components.opensensemap
-# (787) homeassistant.components.opensensemap
+# (808) homeassistant.components.opensensemap
 opensensemap-api==0.1.5
 
 ##### homeassistant.components.openweathermap
-# (1215) homeassistant.components.openweathermap
+# (1245) homeassistant.components.openweathermap
 pyowm==2.10.0
 
 ##### homeassistant.components.yr
-# (1804) homeassistant.components.yr
-xmltodict==0.11.0
+# (1825) homeassistant.components.yr
+xmltodict==0.12.0
 
 ##### homeassistant.components.bluetooth_le_tracker
-# (1059) homeassistant.components.bluetooth_le_tracker
+# (1086) homeassistant.components.bluetooth_le_tracker
 pygatt[GATTTOOL]==4.0.1
 
 ##### homeassistant.components.bluetooth_tracker
-# (257) homeassistant.components.bluetooth_tracker
+# (272) homeassistant.components.bluetooth_tracker
 bt_proximity==0.1.2
 
-# (963) homeassistant.components.bluetooth_tracker
+# (990) homeassistant.components.bluetooth_tracker
 
 ##### homeassistant.components.google_maps
-# (658) homeassistant.components.google_maps
+# (676) homeassistant.components.google_maps
 locationsharinglib==3.0.11
 
 ##### homeassistant.components.nmap_tracker
-# (1365) homeassistant.components.nmap_tracker
+# (1392) homeassistant.components.nmap_tracker
 python-nmap==0.6.1
 
 ##### homeassistant.components.dnsip
-# (111) homeassistant.components.dnsip
-aiodns==1.1.1
+# (117) homeassistant.components.dnsip
+aiodns==2.0.0
 
 ##### homeassistant.components.dweet
-# (355) homeassistant.components.dweet
+# (370) homeassistant.components.dweet
 dweepy==0.3.0
 
 ##### homeassistant.components.feedreader
-# (420) homeassistant.components.feedreader
+# (435) homeassistant.components.feedreader
 feedparser-homeassistant==5.2.2.dev1
 
 ##### homeassistant.components.geo_rss_events
-# (469) homeassistant.components.geo_rss_events
+# (484) homeassistant.components.geo_rss_events
 georss_generic_client==0.2
 
 ##### homeassistant.components.season
-# (391) homeassistant.components.season
+# (406) homeassistant.components.season
 ephem==3.7.6.0
 
 ##### homeassistant.components.serial
-# (848) homeassistant.components.serial_pm
+# (869) homeassistant.components.serial_pm
 pmsensor==0.4
 
-# (1257) homeassistant.components.serial
+# (1284) homeassistant.components.serial
 pyserial-asyncio==0.4
 
 ##### homeassistant.components.xmpp
-# (1587) homeassistant.components.xmpp
+# (1614) homeassistant.components.xmpp
 slixmpp==1.4.2
 
 ##### homeassistant.components.mailgun
-# (1147) homeassistant.components.mailgun
+# (1177) homeassistant.components.mailgun
 pymailgunner==1.4
 
 ##### homeassistant.components.html5
-# (1461) homeassistant.components.html5
+# (1488) homeassistant.components.html5
 pywebpush==1.9.2
 
 ##### homeassistant.components.pushbullet
-# (881) homeassistant.components.pushbullet
+# (905) homeassistant.components.pushbullet
 pushbullet.py==0.11.0
 
 ##### homeassistant.components.telegram_bot
-# (1392) homeassistant.components.telegram_bot
+# (1419) homeassistant.components.telegram_bot
 python-telegram-bot==11.1.0
 
 ##### homeassistant.components.twilio
-# (1724) homeassistant.components.twilio
+# (1745) homeassistant.components.twilio
 twilio==6.19.1
 
 ##### homeassistant.components.twitter
-# (81) homeassistant.components.twitter
+# (87) homeassistant.components.twitter
 TwitterAPI==2.5.9
 
 ##### homeassistant.components.mpd
-# (1356) homeassistant.components.mpd
+# (1383) homeassistant.components.mpd
 python-mpd2==1.0.0
 
 ##### homeassistant.components.vlc
-# (1401) homeassistant.components.vlc
+# (1428) homeassistant.components.vlc
 python-vlc==1.1.2
 
 ##### homeassistant.components.spotify
-# (1628) homeassistant.components.spotify
+# (1655) homeassistant.components.spotify
 spotipy-homeassistant==2.4.4.dev1
 
 ##### homeassistant.components.gstreamer
-# (505) homeassistant.components.gstreamer
+# (520) homeassistant.components.gstreamer
 gstreamer-player==1.1.2
 
 ##### homeassistant.components.opencv
-# (760) homeassistant.components.opencv
-numpy==1.16.2
+# (782) homeassistant.components.opencv
+numpy==1.16.3
 
 ##### homeassistant.components.buienradar
-# (266) homeassistant.components.buienradar
+# (281) homeassistant.components.buienradar
 buienradar==0.91
 
 ##### homeassistant.components.dsmr
-# (352) homeassistant.components.dsmr
+# (367) homeassistant.components.dsmr
 dsmr_parser==0.12
 
 ##### homeassistant.components.honeywell
-# (407) homeassistant.components.honeywell
+# (422) homeassistant.components.honeywell
 evohomeclient==0.3.2
 
-# (1613) homeassistant.components.honeywell
+# (1640) homeassistant.components.honeywell
 somecomfort==0.5.2
 
 ##### homeassistant.components.evohome
-# (406) homeassistant.components.evohome
+# (421) homeassistant.components.evohome
 evohomeclient==0.3.2
 
 ##### homeassistant.components.postnl
-# (854) homeassistant.components.postnl
+# (875) homeassistant.components.postnl
 postnl_api==1.0.2
 
 ##### homeassistant.components.zwave
-# (553) homeassistant.components.zwave
+# (568) homeassistant.components.zwave
 homeassistant-pyozw==0.1.4
 
-# (1005) homeassistant.components.zwave
+# (1032) homeassistant.components.zwave
 pydispatcher==2.0.5
 
 ##### homeassistant.components.vera
-# (1449) homeassistant.components.vera
+# (1476) homeassistant.components.vera
 pyvera==0.2.45
 
 ##### homeassistant.components.transmission
-# (1718) homeassistant.components.transmission
+# (1739) homeassistant.components.transmission
 transmissionrpc==0.11
 
 ##### homeassistant.components.prometheus
-# (869) homeassistant.components.prometheus
+# (890) homeassistant.components.prometheus
 prometheus_client==0.2.0
 
 ##### homeassistant.components.yi
-# (120) homeassistant.components.yi
+# (126) homeassistant.components.yi
 aioftp==0.12.0
 

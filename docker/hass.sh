@@ -25,7 +25,7 @@ _check_config() {
 	local errors
 
 	run=(python3 -m homeassistant --config ${HA_CONFIG} --script check_config --info --files)
-	if ! errors="$("${run[@]}" 2>&1 >/dev/null)"
+	if ! errors="$("${run[@]}" 2>&1)"
 	then
 		cat >&2 <<-EOM
 			Error: HA failed while attempting to check config

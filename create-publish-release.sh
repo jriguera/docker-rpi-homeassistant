@@ -168,7 +168,7 @@ releaseid=$($CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: appl
 
 echo "* Uploading image to Github releases section ... "
 echo -n "  URL: "
-$CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/octet-stream" --data-binary @"/tmp/$NAME-$VERSION.tgz" "https://uploads.github.com/repos/$GITHUB_REPO/releases/$releaseid/assets?name=$NAME-$VERSION.tgz" | $JQ -r '.browser_download_url'
+$CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/octet-stream" -XPOST -T "/tmp/$NAME-$VERSION.tgz" "https://uploads.github.com/repos/$GITHUB_REPO/releases/$releaseid/assets?name=$NAME-$VERSION.tgz" | $JQ -r '.browser_download_url'
 
 echo
 echo "*** Description https://github.com/$GITHUB_REPO/releases/tag/v$VERSION: "

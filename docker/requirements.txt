@@ -314,7 +314,7 @@ pydispatcher==2.0.5
 
 ##### homeassistant.components.vera
 # (1568) homeassistant.components.vera
-pyvera==0.3.2
+pyvera==0.3.3
 
 ##### homeassistant.components.transmission
 # (1846) homeassistant.components.transmission

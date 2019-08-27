@@ -38,6 +38,7 @@ homeassistant.components.google
 homeassistant.components.remember_the_milk
 homeassistant.components.ifttt
 homeassistant.components.mysensors
+homeassistant.components.workday
 
 homeassistant.components.opensensemap
 homeassistant.components.openweathermap
@@ -69,7 +70,6 @@ homeassistant.components.gstreamer
 # homeassistant.components.rpi_gpio_pwm
 
 homeassistant.components.camera
-homeassistant.components.ffmpeg
 homeassistant.components.onvif
 # homeassistant.components.dlib_face_detect
 # homeassistant.components.dlib_face_identify

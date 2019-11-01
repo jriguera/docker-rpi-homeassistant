@@ -85,7 +85,7 @@ then
     exit 1
 fi
 
-DOCKER_USER=$(docker info 2> /dev/null  | sed -ne 's/^Username: \(.*\)/\1/p')
+DOCKER_USER=$(docker info 2> /dev/null  | sed -ne 's/Username: \(.*\)/\1/p')
 if [ -z "$DOCKER_USER" ]
 then
     echo "ERROR: Not logged in Docker Hub!"
@@ -122,22 +122,21 @@ then
 fi
 echo "$CHANGELOG"
 
-pushd docker
-    echo "* Building Docker image with tag $NAME:$VERSION ..."
-    $DOCKER build \
-      --build-arg ARCH=${ARCH} \
-      --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
-      .  -t $NAME
-    $DOCKER tag $NAME $DOCKER_TAG
+echo "* Building Docker image with tag $NAME:$VERSION ..."
+$DOCKER build \
+    --build-arg ARCH=${ARCH} \
+    --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
+    .  -t $NAME
+$DOCKER tag $NAME $DOCKER_TAG
 
-    # Uploading docker image
-    echo "* Pusing Docker image to Docker Hub ..."
-    $DOCKER push $DOCKER_TAG
-    $DOCKER tag $NAME $DOCKER_TAG:$VERSION
-    $DOCKER push $DOCKER_TAG
+# Uploading docker image
+echo "* Pusing Docker image to Docker Hub ..."
+$DOCKER push $DOCKER_TAG
+$DOCKER tag $NAME $DOCKER_TAG:$VERSION
+$DOCKER push $DOCKER_TAG
 
-    $DOCKER save -o "/tmp/$NAME-$VERSION.tgz" $DOCKER_TAG:$VERSION
-popd
+# Save it local
+$DOCKER save -o "/tmp/$NAME-$VERSION.tgz" $DOCKER_TAG:$VERSION
 
 # Create annotated tag
 echo "* Creating a git tag ... "

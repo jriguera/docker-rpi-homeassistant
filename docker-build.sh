@@ -17,10 +17,7 @@ case "$(uname -m)" in
     ;;
 esac
 
-pushd docker
-    $DOCKER build \
-      --build-arg ARCH=${ARCH} \
-      --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
-      .  -t $NAME
-popd
-
+exec $DOCKER build \
+    --build-arg ARCH=${ARCH} \
+    --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
+    .  -t $NAME

@@ -20,6 +20,32 @@ do
 	esac
 done
 
+# Usage: file_env VAR [DEFAULT]
+#    ie: file_env 'XYZ_DB_PASSWORD' 'example'
+# (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
+#  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
+file_env() {
+	local var="${1}"
+	local def="${2:-}"
+
+	local fvar="${var}_FILE"
+	local val="${def}"
+
+	if [ -n "${!var:-}" ] && [ -r "${fvar}" ]
+	then
+		echo "* Warning: both ${var} and ${fvar} are set, env ${var} takes priority"
+	fi
+	if [ -n "${!var:-}" ]
+	then
+		val="${!var}"
+	elif [ -r "${fvar}" ]
+	then
+		val=$(< "${fvar}")
+	fi
+	export "${var}"="${val}"
+}
+
+
 _check_config() {
 	local run
 	local errors

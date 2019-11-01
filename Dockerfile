@@ -7,7 +7,7 @@
 ARG ARCH=arm32v6
 FROM "${ARCH}/alpine:3.10"
 
-ARG VERSION=0.97.2
+ARG VERSION=0.101.1
 ARG MYVERSION=jose0
 ARG CONFIGDIR=/config
 ARG PORT=8123
@@ -75,7 +75,7 @@ RUN set -xe                                                                 && \
 
 
 WORKDIR ${CONFIGDIR}
-COPY requirements.txt requirements.txt
+COPY docker/*.txt ./
 RUN set -xe                                                                 && \
     addgroup -g "${GUID}" hass                                              && \
     adduser -h "${CONFIGDIR}" -D -G hass -s /bin/bash -u "${UID}" hass      && \
@@ -108,17 +108,16 @@ RUN set -xe                                                                 && \
     pip3 install --no-cache-dir --upgrade pip setuptools                    && \
     pip3 install --no-cache-dir --upgrade mysqlclient                       && \
     pip3 install --no-cache-dir --upgrade wheel                             && \
-    pip3 install --no-cache-dir --upgrade uvloop==0.12.2                    && \
     pip3 install --no-cache-dir --upgrade cython                            && \
     pip3 install --no-cache-dir --upgrade cchardet                          && \
     pip3 install --no-cache-dir homeassistant=="${VERSION}"                 && \
-    pip3 install --no-cache-dir -r requirements.txt                         && \
+    pip3 install --no-cache-dir -r requirements.txt -c constraints.txt      && \
     # clean up
     apk del .build-deps                                                     && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/* ~/.cache
 
 
-COPY *.sh /usr/local/bin/
+COPY docker/*.sh /usr/local/bin/
 RUN set -xe                                                                 && \
     chmod a+x /usr/local/bin/*                                              && \
     ln -s /usr/local/bin/hass.sh /usr/local/bin/docker-entrypoint.sh        && \

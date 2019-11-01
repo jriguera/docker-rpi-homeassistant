@@ -43,6 +43,7 @@ homeassistant.components.workday
 homeassistant.components.opensensemap
 homeassistant.components.openweathermap
 homeassistant.components.yr
+homeassistant.components.met
 
 homeassistant.components.bluetooth_le_tracker
 homeassistant.components.bluetooth_tracker
@@ -69,7 +70,6 @@ homeassistant.components.spotify
 homeassistant.components.gstreamer
 # homeassistant.components.rpi_gpio_pwm
 
-homeassistant.components.camera
 homeassistant.components.onvif
 # homeassistant.components.dlib_face_detect
 # homeassistant.components.dlib_face_identify

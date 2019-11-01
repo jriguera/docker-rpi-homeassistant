@@ -1,0 +1,5 @@
+# General files
+.git
+.github
+./config*/
+./*.sh

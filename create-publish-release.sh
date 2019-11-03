@@ -7,14 +7,14 @@ set -e
 
 NAME="homeassistant"
 DOCKER_TAG="jriguera/$NAME"
-RELEASE="rpi-homeassistant"
+RELEASE="homeassistant"
 DESCRIPTION="Docker image to run Home Assistant in a Raspberry Pi"
 GITHUB_REPO="jriguera/docker-rpi-homeassistant"
 
 ###
 
-DOCKER=docker
-JQ=jq
+DOCKER="docker"
+JQ="jq"
 CURL="curl -s"
 RE_VERSION_NUMBER='^[0-9]+([0-9\.]*[0-9]+)*$'
 
@@ -96,8 +96,8 @@ fi
 # Creating the release
 if [ -z "$VERSION" ]
 then
-    VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' docker/Dockerfile)
-    MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' docker/Dockerfile)
+    VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' Dockerfile)
+    MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' Dockerfile)
     [ -n "$MYVERSION" ] && VERSION="$VERSION-$MYVERSION"
     echo "* Creating final release version $VERSION (from Dockerfile) ..."
 else

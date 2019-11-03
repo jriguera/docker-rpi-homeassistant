@@ -27,8 +27,8 @@ LABEL org.label-schema.vcs-url="https://github.com/jriguera/docker-rpi-homeassis
 LABEL maintainer="Jose Riguera <jriguera@gmail.com>"
 LABEL architecture="${ARCH}"
 
-ENV HA_PORT="${PORT}"
-ENV HA_CONFIG="${CONFIGDIR}"
+ENV PORT="${PORT}"
+ENV CONFIGDIR="${CONFIGDIR}"
 ENV LANG=en_US.utf8
 ENV LC_ALL=C.UTF-8
 ENV ARCH="${ARCH}"

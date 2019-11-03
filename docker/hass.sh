@@ -1,24 +1,10 @@
 #!/bin/bash
 set -eo pipefail
 
-HA_CONFIG=${HA_CONFIG:-"/config"}
+HA_CONFIG=${HA_CONFIG:-$CONFIGDIR}
+HA_PORT=${HA_PORT:-$PORT}
 
-# if command starts with an option, prepend hass
-if [ "${1:0:1}" = '-' ]; then
-	set -- hass --config ${HA_CONFIG} "$@"
-fi
-
-# Skip setup if they want an option that stops HA
-HELP=0
-for arg
-do
-	case "$arg" in
-		-h|--help|--version)
-			HELP=1
-			break
-		;;
-	esac
-done
+###
 
 # Usage: file_env VAR [DEFAULT]
 #    ie: file_env 'XYZ_DB_PASSWORD' 'example'
@@ -62,8 +48,34 @@ _check_config() {
 	fi
 }
 
+
+###
+
+# if command starts with an option, prepend hass
+if [ "${1:0:1}" = '-' ]; then
+	set -- hass --config ${HA_CONFIG} "$@"
+fi
+
+# Skip setup if they want an option that stops HA
+HELP=0
+for arg
+do
+	case "$arg" in
+		-h|--help|--version)
+			HELP=1
+			break
+		;;
+	esac
+done
+
 if [ "$1" == "hass" ] && [ "${HELP}" == "0" ]
 then
+	# allow the container to be started with `--user`
+	if [ "$(id -u)" == "0" ]
+	then
+		chown -R hass:hass "${HA_CONFIG}"
+		exec su-exec hass "${BASH_SOURCE}" "$@"
+	fi
 	if [ ! -e "${HA_CONFIG}/configuration.yaml" ]
 	then
 		echo >&2 "Warning: Configuration is uninitialized. Creating default configuration ..."

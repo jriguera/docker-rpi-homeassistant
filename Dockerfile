@@ -8,7 +8,7 @@ ARG ARCH=arm32v6
 FROM "${ARCH}/alpine:3.10"
 
 ARG VERSION=0.101.2
-ARG MYVERSION=jose0
+ARG MYVERSION=jose1
 ARG CONFIGDIR=/config
 ARG PORT=8123
 ARG UID=1000
@@ -63,6 +63,8 @@ RUN set -xe                                                                 && \
         libxslt \
         mpfr3 \
         mpc1 \
+        pwgen \
+        su-exec \
         bluez-libs \
         eudev-libs \
         iperf3 \

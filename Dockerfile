@@ -63,6 +63,8 @@ RUN set -xe                                                                 && \
         libxslt \
         mpfr3 \
         mpc1 \
+        pwgen \
+        su-exec \
         bluez-libs \
         eudev-libs \
         iperf3 \

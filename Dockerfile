@@ -61,7 +61,6 @@ RUN set -xe                                                                 && \
         libxml2 \
         libgcrypt \
         libxslt \
-        mpfr3 \
         mpc1 \
         pwgen \
         su-exec \

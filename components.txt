@@ -75,6 +75,7 @@ homeassistant.components.onvif
 # homeassistant.components.dlib_face_identify
 homeassistant.components.opencv
 # homeassistant.components.tensorflow
+homeassistant.components.homekit
 
 # NL
 homeassistant.components.buienradar

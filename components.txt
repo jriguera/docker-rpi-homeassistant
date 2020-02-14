@@ -82,7 +82,6 @@ homeassistant.components.buienradar
 homeassistant.components.dsmr
 homeassistant.components.honeywell
 homeassistant.components.evohome
-homeassistant.components.postnl
 homeassistant.components.zwave
 homeassistant.components.vera
 

@@ -13,6 +13,8 @@ ARG MYVERSION=jose0
 ARG CONFIGDIR=/config
 ARG PORT=8123
 ARG TZ=Europe/Amsterdam
+ARG UID=1000
+ARG GUID=1000
 
 LABEL org.label-schema.docker.schema-version="1.0"
 LABEL org.label-schema.vendor="Jose Riguera"

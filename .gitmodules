@@ -1,3 +1,6 @@
 [submodule "home-assistant-docker"]
 	path = home-assistant-docker
 	url = https://github.com/home-assistant/docker.git
+[submodule "home-assistant-core"]
+	path = home-assistant-core
+	url = https://github.com/home-assistant/core.git

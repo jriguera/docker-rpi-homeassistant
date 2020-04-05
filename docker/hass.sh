@@ -32,7 +32,7 @@ file_env() {
 }
 
 
-_check_config() {
+check_config() {
 	local run
 	local errors
 
@@ -44,7 +44,6 @@ _check_config() {
 			       Command was: "${run[*]}"
 			$errors
 		EOM
-		exit 1
 	fi
 }
 
@@ -91,7 +90,7 @@ then
 		fi
 	else
 		# still need to check config, container may have started with --user
-		_check_config
+		check_config
 	fi
 fi
 

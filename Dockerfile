@@ -40,13 +40,17 @@ RUN set -xe                                                                 && \
     # Installing Alpine packages
     # apk -U upgrade
     apk add --no-cache \
+        tzdata \
+        bash \
         su-exec \
         ca-certificates \
         openssh-client \
         mariadb-client \
+        mosquitto-clients \
         fping \
         pwgen \
-        mosquitto-clients \
+        jq \
+        curl \
                                                                             && \
     # clean up
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/* ~/.cache

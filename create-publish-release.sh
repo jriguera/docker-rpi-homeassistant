@@ -125,6 +125,7 @@ echo "$CHANGELOG"
 
 echo "* Building Docker image with tag $NAME:$VERSION ..."
 $DOCKER build \
+    --build-arg VERSION=${VERSION} \
     --build-arg ARCH=${ARCH} \
     --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
     .  -t $NAME

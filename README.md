@@ -24,10 +24,16 @@ docker build . -t homeassistant
 ### Update HA version
 
 1. Update submodule to the proper tag `cd home-assistant && git checkout tags/<VERSION>`
+2. Build new docker image: `./docker-build.sh`
+3. Publish new docker image in DockerHub and GitHub: `create-publish-release.sh`
+
+### Update HA version (old way using Dockerfile.original)
+
+1. Update submodule to the proper tag `cd home-assistant && git checkout tags/<VERSION>`
 2. Update `docker/Dockerfile` version argument
 3. Manage requirements and check errors: `./manage-components.sh | grep -i "error"`
 4. Update `docker/requirements.txt`: `./manage-components.sh > docker/requirements.txt`
-5. Commit the cahnges: `git add home-assistant docker/Dockerfile docker/requirements.txt && git commit -m "Updated HA submodule to <version>`
+5. Commit the changes: `git add home-assistant docker/Dockerfile docker/requirements.txt && git commit -m "Updated HA submodule to <version>`
 6. Build new docker image: `./docker-build.sh`
 7. Publish new docker image in DockerHub and GitHub: `create-publish-release.sh`
 

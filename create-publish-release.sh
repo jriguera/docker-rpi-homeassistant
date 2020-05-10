@@ -103,8 +103,6 @@ if [ -z "$VERSION" ]
 then
     VERSION=$(cd "$(dirname "${BASH_SOURCE[0]}")/home-assistant-core" && git describe --tags | head -n1)
     # VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' Dockerfile)
-    MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' Dockerfile)
-    [ -n "$MYVERSION" ] && VERSION="$VERSION-$MYVERSION"
     echo "* Creating final release version $VERSION (from Dockerfile/submodule) ..."
 else
     echo "* Creating final release version $VERSION (from input)..."
@@ -135,6 +133,9 @@ $DOCKER build \
     --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \
     .  -t $NAME
 $DOCKER tag $NAME $DOCKER_TAG
+
+MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' Dockerfile)
+[ -n "$MYVERSION" ] && VERSION="$VERSION-$MYVERSION"
 
 # Uploading docker image
 echo "* Pusing Docker image to Docker Hub ..."

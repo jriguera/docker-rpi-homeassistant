@@ -23,7 +23,12 @@ RE_VERSION_NUMBER='^[0-9]+([0-9\.]*[0-9]+)*$'
 ARCH=""
 case "$(uname -m)" in
     armv7l)
-	ARCH='arm32v6'
+        ARCH=armhf
+        if [ -r /proc/device-tree/model ]
+        then
+            ARCH='raspberrypi'
+            ARCH=${ARCH}$(awk '{ print $3 }' /proc/device-tree/model)
+        fi
     ;;
     x86_64|amd64)
         ARCH='amd64'
@@ -100,7 +105,7 @@ then
     # VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' Dockerfile)
     MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' Dockerfile)
     [ -n "$MYVERSION" ] && VERSION="$VERSION-$MYVERSION"
-    echo "* Creating final release version $VERSION (from Dockerfile) ..."
+    echo "* Creating final release version $VERSION (from Dockerfile/submodule) ..."
 else
     echo "* Creating final release version $VERSION (from input)..."
 fi

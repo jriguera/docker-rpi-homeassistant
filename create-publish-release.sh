@@ -96,7 +96,8 @@ fi
 # Creating the release
 if [ -z "$VERSION" ]
 then
-    VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' Dockerfile)
+    VERSION=$(cd "$(dirname "${BASH_SOURCE[0]}")/home-assistant-core" && git describe --tags | head -n1)
+    # VERSION=$(sed -ne 's/^ARG.* VERSION=\(.*\)/\1/p' Dockerfile)
     MYVERSION=$(sed -ne 's/^ARG.* MYVERSION=\(.*\)/\1/p' Dockerfile)
     [ -n "$MYVERSION" ] && VERSION="$VERSION-$MYVERSION"
     echo "* Creating final release version $VERSION (from Dockerfile) ..."

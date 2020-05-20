@@ -146,7 +146,7 @@ google-cloud-texttospeech==0.4.0
 googlemaps==2.5.1
 
 # (696) homeassistant.components.google
-httplib2==0.10.3
+httplib2==0.18.0
 
 # (810) homeassistant.components.google_maps
 locationsharinglib==4.1.0
@@ -159,7 +159,7 @@ oauth2client==4.0.0
 RtmAPI==0.7.2
 
 # (697) homeassistant.components.remember_the_milk
-httplib2==0.10.3
+httplib2==0.18.0
 
 ##### homeassistant.components.ifttt
 # (1262) homeassistant.components.ifttt

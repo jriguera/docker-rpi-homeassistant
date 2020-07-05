@@ -109,14 +109,14 @@ else
 fi
 
 # Get the last git commit made by this script
-LASTCOMMIT=$(git show-ref --tags -d | tail -n 1)
+LASTCOMMIT=$(git show-ref --tags | awk '{ split($2,tag,"/"); split(tag[3],mytag,"-"); print $1 "." mytag[1] "." mytag[2] }' | sort -t. -k 2,2n -k 3,3n -k 4,4n -k 5,5n | tail -n 1)
 if [ -z "$LASTCOMMIT" ]
 then
     echo "* Changes since the beginning: "
     CHANGELOG=$(git log --pretty="%h %aI %s (%an)" | sed 's/^/- /')
 else
     echo "* Changes since last version with commit $LASTCOMMIT: "
-    CHANGELOG=$(git log --pretty="%h %aI %s (%an)" "$(echo $LASTCOMMIT | cut -d' ' -f 1)..@" | sed 's/^/- /')
+    CHANGELOG=$(git log --pretty="%h %aI %s (%an)" "$(echo $LASTCOMMIT | cut -d'.' -f 1)..@" | sed 's/^/- /')
 fi
 if [ -z "$CHANGELOG" ]
 then
@@ -147,8 +147,8 @@ $DOCKER push $DOCKER_TAG
 $DOCKER save -o "/tmp/$NAME-$VERSION.tgz" $DOCKER_TAG:$VERSION
 
 # Create annotated tag
-echo "* Creating a git tag ... "
-git tag -a "v$VERSION" -m "$RELEASE v$VERSION"
+echo "* Creating a git tag: $VERSION ... "
+git tag -a "$VERSION" -m "$RELEASE v$VERSION"
 git push --tags
 
 # Create a release in Github
@@ -169,7 +169,7 @@ $CHANGELOG
 EOF
 )
 
-printf -v data '{"tag_name": "v%s","target_commitish": "master","name": "v%s","body": %s,"draft": false, "prerelease": false}' "$VERSION" "$VERSION" "$(echo "$DESC" | $JQ -R -s '@text')"
+printf -v data '{"tag_name": "%s","target_commitish": "master","name": "v%s","body": %s,"draft": false, "prerelease": false}' "$VERSION" "$VERSION" "$(echo "$DESC" | $JQ -R -s '@text')"
 releaseid=$($CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" -XPOST --data "$data" "https://api.github.com/repos/$GITHUB_REPO/releases" | $JQ '.id')
 # Upload the release
 
@@ -178,7 +178,7 @@ echo -n "  URL: "
 $CURL -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/octet-stream" -XPOST -T "/tmp/$NAME-$VERSION.tgz" "https://uploads.github.com/repos/$GITHUB_REPO/releases/$releaseid/assets?name=$NAME-$VERSION.tgz" | $JQ -r '.browser_download_url'
 
 echo
-echo "*** Description https://github.com/$GITHUB_REPO/releases/tag/v$VERSION: "
+echo "*** Description https://github.com/$GITHUB_REPO/releases/tag/$VERSION: "
 echo
 echo "$DESC"
 

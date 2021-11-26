@@ -71,7 +71,7 @@ WORKDIR ${CONFIGDIR}
 VOLUME "${CONFIGDIR}"
 EXPOSE "${PORT}"
 
-HEALTHCHECK --interval=30 --timeout=10s --start-period=3m \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=3m \
     CMD /healthcheck.sh
 
 ENTRYPOINT ["/run.sh"]

@@ -45,10 +45,10 @@ RUN set -xe                                                                 && \
         su-exec \
         ca-certificates \
         openssh-client \
-        mariadb-client \
         mosquitto-clients \
-        fping \
+        mariadb-client \
         pwgen \
+        fping \
         jq \
         curl \
                                                                             && \

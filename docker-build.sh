@@ -25,6 +25,7 @@ case "$(uname -m)" in
 esac
 
 exec $DOCKER build \
+    --squash \
     --build-arg VERSION=${VERSION} \
     --build-arg ARCH=${ARCH} \
     --build-arg TZ=$(timedatectl  | awk '/Time zone:/{ print $3 }') \

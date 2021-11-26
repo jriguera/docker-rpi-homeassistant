@@ -9,7 +9,7 @@ ARG ARCH=armhf
 ARG VERSION=stable
 FROM "homeassistant/${ARCH}-homeassistant:${VERSION}"
 
-ARG MYVERSION=0
+ARG MYVERSION=jose0
 ARG CONFIGDIR=/config
 ARG PORT=8123
 ARG TZ=Europe/Amsterdam
@@ -61,6 +61,7 @@ RUN set -xe                                                                 && \
     ln -s /usr/local/bin/hass.sh /usr/local/bin/docker-entrypoint.sh        && \
     ln -s /usr/local/bin/hass.sh /docker-entrypoint.sh                      && \
     ln -s /usr/local/bin/hass.sh /run.sh                                    && \
+    ln -s /usr/local/bin/healthcheck.sh /healthcheck.sh                     && \
     mkdir -p /docker-entrypoint-initdb.d
 
 ENV PORT="${PORT}"
@@ -70,8 +71,10 @@ WORKDIR ${CONFIGDIR}
 VOLUME "${CONFIGDIR}"
 EXPOSE "${PORT}"
 
+HEALTHCHECK --interval=30 --timeout=10s --start-period=3m \
+    CMD /healthcheck.sh
+
 ENTRYPOINT ["/run.sh"]
 
 # Define default command
 CMD ["--log-no-color"]
-

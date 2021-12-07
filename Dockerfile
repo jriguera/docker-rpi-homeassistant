@@ -9,7 +9,7 @@ ARG ARCH=armhf
 ARG VERSION=stable
 FROM "homeassistant/${ARCH}-homeassistant:${VERSION}"
 
-ARG MYVERSION=jose0
+ARG MYVERSION=jose1
 ARG CONFIGDIR=/config
 ARG PORT=8123
 ARG TZ=Europe/Amsterdam
